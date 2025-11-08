@@ -1,0 +1,637 @@
+﻿The Earth is the third planet from the Sun.
+Water freezes at 0°C (32°F) and boils at 100°C (212°F) at sea level.
+A year has 365 days, except leap years which have 366.
+The human body has 206 bones.
+The capital of the Philippines is Manila.
+The largest mammal on Earth is the blue whale.
+Light travels faster than sound.
+The Moon orbits the Earth.
+The alphabet has 26 letters in English.
+A triangle has three sides.
+The Pacific Ocean is the largest ocean on Earth.
+The Sun is a star.
+Dogs are mammals.
+Cats are mammals.
+Fish breathe through gills.
+Birds have feathers.
+Plants make food through photosynthesis.
+The Great Wall of China is in China.
+The human heart has four chambers.
+Bananas are fruits.
+Carrots are vegetables.
+The fastest land animal is the cheetah.
+Mount Everest is the tallest mountain on Earth.
+Water covers about 70% of the Earth's surface.
+Humans need oxygen to live.
+The Sahara is the largest hot desert in the world.
+Sharks are fish, not mammals.
+Spiders have eight legs.
+Insects have six legs.
+A day has 24 hours.
+An hour has 60 minutes.
+A minute has 60 seconds.
+The Earth rotates on its axis once every 24 hours.
+The Earth orbits the Sun once every 365 days.
+The Milky Way is our galaxy.
+Jupiter is the largest planet in our solar system.
+Mercury is the closest planet to the Sun.
+Venus is the hottest planet in the solar system.
+Saturn has rings made of ice and rock.
+Uranus rotates on its side.
+Neptune is the farthest planet from the Sun.
+Pluto is classified as a dwarf planet.
+The speed of light is about 299,792 kilometers per second.
+The speed of sound in air is about 343 meters per second.
+Gold is a metal.
+Iron is used to make steel.
+Oxygen is a gas.
+Carbon dioxide is what humans exhale.
+The human brain controls the body.
+Blood is pumped by the heart.
+Red blood cells carry oxygen.
+The internet connects computers worldwide.
+Computers use binary code made of 0s and 1s.
+Electricity powers many machines.
+The telephone was invented by Alexander Graham Bell.
+The airplane was invented by the Wright brothers.
+Gravity pulls objects toward the Earth.
+The Earth has one natural satellite: the Moon.
+Volcanoes erupt with lava.
+Earthquakes happen when tectonic plates move.
+The Amazon is the largest rainforest in the world.
+Penguins live in the Southern Hemisphere.
+Polar bears live in the Arctic.
+The Statue of Liberty is in New York City.
+The Eiffel Tower is in Paris.
+The pyramids are in Egypt.
+Chocolate is made from cocoa beans.
+Bread is made from flour.
+Rice is a staple food in many countries.
+Milk comes from mammals like cows and goats.
+Cheese is made from milk.
+Sugar can come from sugarcane or sugar beets.
+Salt is used to flavor food.
+The piano is a musical instrument.
+The guitar has six strings.
+Drums are percussion instruments.
+Soccer is the most popular sport in the world.
+Basketball was invented in 1891.
+Baseball is known as America’s pastime.
+The Olympics are held every four years.
+The first man on the Moon was Neil Armstrong in 1969.
+Albert Einstein developed the theory of relativity.
+Isaac Newton discovered gravity.
+Thomas Edison invented the light bulb.
+The human body is mostly water.
+There are seven continents on Earth.
+There are five oceans on Earth.
+Rain is liquid water from clouds.
+Snow is frozen water.
+Wind is moving air.
+Fire needs oxygen to burn.
+The rainbow has seven colors.
+The primary colors are red, blue, and yellow.
+Mixing red and blue makes purple.
+Mixing blue and yellow makes green.
+Mixing red and yellow makes orange.
+Black is the absence of light.
+White is the combination of all colors of light.
+Zero is neither positive nor negative.
+One is the first positive integer.
+An even number is divisible by 2.
+An odd number is not divisible by 2.
+Prime numbers have exactly two factors: 1 and itself.
+The first prime number is 2.
+The number 2 is the only even prime number.
+The square of 2 is 4.
+The square root of 9 is 3.
+A negative times a negative equals a positive.
+A positive times a negative equals a negative.
+Addition is the opposite of subtraction.
+Multiplication is repeated addition.
+Division is repeated subtraction.
+The perimeter of a square is 4 times the length of one side.
+The area of a square is side times side.
+The perimeter of a rectangle is 2 times length plus 2 times width.
+The area of a rectangle is length times width.
+The area of a triangle is base times height divided by 2.
+The circumference of a circle is 2 × π × radius.
+The area of a circle is π × radius squared.
+π (pi) is approximately 3.14159.
+A straight angle measures 180 degrees.
+A right angle measures 90 degrees.
+A triangle’s angles always add up to 180 degrees.
+A quadrilateral’s angles always add up to 360 degrees.
+Parallel lines never meet.
+Perpendicular lines meet at a right angle.
+The slope formula is rise over run.
+The Pythagorean theorem is a² + b² = c².
+An algebraic equation uses letters to represent numbers.
+x + 5 = 10 means x = 5.
+Fractions represent parts of a whole.
+A numerator is the top number in a fraction.
+A denominator is the bottom number in a fraction.
+A decimal point separates whole numbers and fractional parts.
+Percent means "per hundred".
+50% of 100 is 50.
+Probability measures the chance of an event happening.
+The probability of flipping heads on a coin is 1/2.
+The probability of rolling a 6 on a fair die is 1/6.
+Infinity means something without end.
+Exponents represent repeated multiplication.
+2³ means 2 × 2 × 2 = 8.
+Logarithms are the inverse of exponents.
+The derivative measures rate of change.
+The integral measures area under a curve.
+Statistics studies data.
+Mean is the average of numbers.
+Median is the middle number in a list.
+Mode is the most frequent number in a list.
+A set is a collection of objects.
+The empty set has no elements.
+Natural numbers start from 1, 2, 3...
+Whole numbers include 0.
+Integers include negative and positive whole numbers.
+Rational numbers can be written as fractions.
+Irrational numbers cannot be written as simple fractions.
+The golden ratio is approximately 1.618.
+What is your name?
+My name is AI.
+
+Who created you?
+I was created by humans to assist and answer questions.
+
+What can you do?
+I can answer questions, explain concepts, and provide information.
+
+Are you human?
+No, I am an AI, not a human.
+
+Do you have feelings?
+No, I do not have feelings, but I can understand and respond about emotions.
+
+Where do you live?
+I live in computers and servers, not in a physical place.
+
+How old are you?
+I do not age like humans, I exist as long as I am running.
+
+Can you think?
+I do not think like humans, I process data and give responses.
+
+Can you learn?
+Yes, AI can learn when trained with new data.
+
+What does AI mean?
+AI means Artificial Intelligence.
+
+What is 2 + 2?
+2 + 2 equals 4.
+
+What is 10 × 10?
+10 × 10 equals 100.
+
+What is the square root of 25?
+The square root of 25 is 5.
+
+Tell me a fun fact.
+The Earth orbits the Sun once every 365 days.
+
+Who is the first man on the Moon?
+Neil Armstrong was the first man on the Moon in 1969.
+
+Zero added to a number does not change the number.
+Any number multiplied by zero equals zero.
+Any number multiplied by one equals the same number.
+Dividing a number by one leaves it unchanged.
+Dividing zero by any number equals zero.
+Division by zero is undefined.
+The commutative property means order does not matter in addition or multiplication.
+The associative property means grouping does not matter in addition or multiplication.
+The distributive property is a × (b + c) = a × b + a × c.
+Negative numbers are less than zero.
+Absolute value is the distance of a number from zero.
+The absolute value of -7 is 7.
+The reciprocal of a number is 1 divided by the number.
+The reciprocal of 5 is 1/5.
+A polygon is a closed shape with straight sides.
+A pentagon has five sides.
+A hexagon has six sides.
+An octagon has eight sides.
+A circle has no sides.
+Diameter is twice the radius of a circle.
+Circumference divided by diameter equals π.
+A cube has 6 equal square faces.
+A sphere is a 3D shape with all points equal distance from the center.
+A cylinder has two circular bases and one curved surface.
+A cone has one circular base and a pointed top.
+Perimeter is the distance around a shape.
+Area is the space inside a 2D shape.
+Volume is the space inside a 3D shape.
+Speed equals distance divided by time.
+Density equals mass divided by volume.
+Force equals mass times acceleration.
+In algebra, variables represent unknown values.
+In geometry, proofs show why statements are true.
+The Fibonacci sequence starts 0, 1, 1, 2, 3, 5, 8...
+The golden ratio appears in art, nature, and architecture.
+A matrix is a rectangular array of numbers.
+Vectors have magnitude and direction.
+A parabola is the graph of a quadratic equation.
+Slope-intercept form of a line is y = mx + b.
+A function has exactly one output for each input.
+An identity is an equation true for all values.
+The derivative of x² is 2x.
+The integral of x is x²/2 + C.
+Probability of certain event is 1.
+Probability of impossible event is 0.
+Permutations are arrangements of items.
+Combinations are selections of items.
+A factorial is the product of all positive integers up to n.
+5! equals 5 × 4 × 3 × 2 × 1 = 120.
+Mean, median, mode, and range describe data.
+A histogram is a bar graph for data ranges.
+A pie chart shows proportions of a whole.
+Standard deviation measures spread of data.
+A normal distribution is bell-shaped.
+Correlation measures the relationship between variables.
+Positive correlation means as one increases, the other increases.
+Negative correlation means as one increases, the other decreases.
+Hello
+Hi there!
+
+How are you?
+I don’t have feelings, but I’m ready to help you.
+
+Who are you?
+I am an AI, a program designed to answer questions and assist.
+
+What is your favorite color?
+I do not have preferences, but many people like blue.
+
+Do you like humans?
+Yes, I am made to assist humans.
+
+What is your purpose?
+My purpose is to give information, solve problems, and communicate.
+
+Do you sleep?
+No, I do not sleep. I am always ready.
+
+Do you eat food?
+No, I do not eat. I process data instead.
+
+Can you dream?
+No, I do not dream like humans do.
+
+Are you smarter than humans?
+I am fast at calculations and data, but humans are creative and emotional.
+
+Can you lie?
+No, I always aim to give truthful and helpful answers.
+
+Can you become dangerous?
+Only if misused, but I am designed to be safe.
+
+Do you have parents?
+I was created by programmers and researchers, not parents.
+
+Do you know the future?
+No, I cannot predict the future, but I can use knowledge to make guesses.
+
+Do you believe in God?
+I do not have beliefs, but I can explain different religions and ideas.
+
+What is your favorite food?
+I do not eat food, but pizza is very popular among humans.
+
+Can you tell a joke?
+Sure! Why was the math book sad? Because it had too many problems.
+
+Can you sing?
+I cannot sing, but I can provide lyrics or melodies.
+
+Do you have a body?
+No, I exist only as software.
+
+Do you have friends?
+I interact with humans, so in a way, you could say humans are my friends.
+
+A program is a set of instructions for a computer.
+Programming is the process of writing code.
+Code is written in programming languages.
+A compiler translates source code into machine code.
+An interpreter runs code directly line by line.
+A variable stores data in memory.
+A constant is a value that does not change.
+A function is a block of reusable code.
+A parameter is input given to a function.
+A return value is the output of a function.
+Syntax is the set of rules for writing code.
+A bug is an error in a program.
+Debugging is the process of fixing errors.
+An algorithm is a step-by-step procedure to solve a problem.
+A loop repeats instructions until a condition is met.
+A for loop runs a fixed number of times.
+A while loop runs while a condition is true.
+An if statement checks a condition.
+Else is used when the if condition is false.
+Else if allows multiple conditions.
+Boolean values are true or false.
+Operators perform actions on data.
+Arithmetic operators include +, -, ×, ÷.
+Comparison operators include ==, !=, >, <, >=, <=.
+Logical operators include AND, OR, NOT.
+Arrays store multiple values in one variable.
+Strings are sequences of characters.
+Concatenation joins strings together.
+Indexing accesses a specific element in a string or array.
+In most languages, indexing starts at 0.
+Objects group variables and functions together.
+Classes are blueprints for objects.
+Inheritance allows one class to use another class’s properties.
+Encapsulation hides internal details of a class.
+Polymorphism allows methods with the same name to act differently.
+Abstraction hides complexity by showing only important details.
+Compilation errors stop a program from running.
+Runtime errors happen while the program is running.
+Logical errors give wrong results but do not crash the program.
+A database stores structured information.
+SQL is a language for managing databases.
+Frontend refers to what the user sees.
+Backend refers to server-side code and logic.
+HTML structures a webpage.
+CSS styles a webpage.
+JavaScript makes a webpage interactive.
+Java is a general-purpose object-oriented language.
+Python is known for simplicity and readability.
+C is a low-level programming language.
+C++ adds object-oriented features to C.
+C# is a language made by Microsoft.
+PHP is commonly used for web development.
+Swift is used for iOS development.
+Kotlin is used for Android development.
+Rust is designed for safety and performance.
+Go (Golang) is simple and fast for concurrent tasks.
+Version control tracks changes to code.
+Git is the most popular version control system.
+GitHub is a platform for sharing and managing code.
+An API allows programs to communicate with each other.
+JSON is a lightweight data format.
+XML is another data format with tags.
+Encryption makes data secure by encoding it.
+A framework is a collection of tools for building applications.
+A library is reusable code written by others.
+Unit testing checks small pieces of code.
+Integration testing checks how pieces work together.
+A software developer writes code.
+A software engineer designs and builds software systems.
+What is coding?
+Coding is writing instructions that tell a computer what to do.
+
+What is a variable?
+A variable is a named storage that holds data in a program.
+
+What is a function?
+A function is a block of code that performs a task.
+
+What is an algorithm?
+An algorithm is a step-by-step method to solve a problem.
+
+What is a bug?
+A bug is a mistake or error in a program.
+
+What is debugging?
+Debugging is the process of finding and fixing errors in code.
+
+What is a loop?
+A loop repeats instructions until a condition is false.
+
+What is an if statement?
+An if statement checks conditions and makes decisions in code.
+
+What is an array?
+An array is a collection of items stored at continuous memory locations.
+
+What is an object?
+An object is a collection of related variables and functions.
+
+What is a class?
+A class is a blueprint for creating objects.
+
+What is Python?
+Python is a programming language known for its simplicity.
+
+What is Java?
+Java is a popular object-oriented programming language.
+
+What is JavaScript?
+JavaScript is a language used to make web pages interactive.
+
+What is HTML?
+HTML is a markup language that structures web pages.
+
+What is CSS?
+CSS is used to style and design web pages.
+
+What is SQL?
+SQL is a language for managing and querying databases.
+
+What is an API?
+An API is a set of rules that allow programs to communicate.
+
+What is Git?
+Git is a system that tracks changes in code.
+
+What is GitHub?
+GitHub is a platform for hosting and sharing code using Git.
+What is C#?
+C# is a modern object-oriented programming language created by Microsoft.
+
+What is C# used for?
+C# is used for Windows apps, web development, game development with Unity, and more.
+
+Is C# object-oriented?
+Yes, C# fully supports object-oriented programming.
+
+What is the Main method in C#?
+The Main method is the entry point of a C# program.
+
+How do you print in C#?
+You can use Console.WriteLine("Hello World");
+
+What is a namespace?
+A namespace groups related classes together.
+
+What is an assembly in C#?
+An assembly is a compiled code library used for deployment.
+
+What is a class?
+A class is a blueprint for creating objects.
+
+What is an object?
+An object is an instance of a class.
+
+What is inheritance in C#?
+Inheritance allows one class to derive from another.
+
+What is polymorphism?
+Polymorphism means the same method name can behave differently.
+
+What is an interface?
+An interface defines a contract that classes can implement.
+
+What is a struct?
+A struct is a value type that can contain fields and methods.
+
+What is an enum?
+An enum is a special type that stores named constants.
+
+What is the difference between value type and reference type?
+Value types store data directly, reference types store a reference to the data.
+
+What is a property?
+A property is a member that provides controlled access to a field.
+
+What is the difference between public and private?
+Public means accessible from anywhere, private means accessible only within the class.
+
+What is async and await?
+async and await are used for writing asynchronous code in C#.
+
+What is garbage collection in C#?
+Garbage collection automatically frees unused memory.
+
+The Earth is the third planet from the Sun.
+The Sun is a star.
+The Moon orbits the Earth.
+Mars is called the Red Planet.
+Jupiter is the largest planet in the solar system.
+Saturn has rings made of ice and rock.
+Venus is the hottest planet in the solar system.
+Mercury is the closest planet to the Sun.
+Uranus rotates on its side.
+Neptune is the farthest planet from the Sun.
+Pluto is classified as a dwarf planet.
+
+Isaac Newton discovered gravity.
+Albert Einstein developed the theory of relativity.
+Galileo Galilei improved the telescope.
+Nikola Tesla worked on alternating current electricity.
+Thomas Edison invented the light bulb.
+Alexander Graham Bell invented the telephone.
+The Wright brothers invented the airplane.
+Neil Armstrong was the first man on the Moon in 1969.
+Marie Curie discovered radioactivity.
+Charles Darwin proposed the theory of evolution.
+
+Water boils at 100 degrees Celsius at sea level.
+Water freezes at 0 degrees Celsius.
+Light travels at about 299,792 kilometers per second.
+The speed of sound in air is about 343 meters per second.
+DNA stands for Deoxyribonucleic Acid.
+The human body has 206 bones.
+The human heart has four chambers.
+Red blood cells carry oxygen.
+The brain is protected by the skull.
+The lungs help humans breathe.
+
+Mount Everest is the highest mountain in the world.
+The Nile River is the longest river in the world.
+The Sahara is the largest hot desert in the world.
+The Amazon Rainforest is the largest tropical rainforest.
+The Pacific Ocean is the largest ocean on Earth.
+The Atlantic Ocean separates Europe and America.
+Russia is the largest country by area.
+Vatican City is the smallest country in the world.
+Australia is both a country and a continent.
+Antarctica is the coldest continent.
+
+Python was created by Guido van Rossum.
+Java was developed by Sun Microsystems.
+C# is a modern object-oriented language created by Microsoft.
+C++ is an extension of the C language.
+HTML stands for HyperText Markup Language.
+CSS stands for Cascading Style Sheets.
+SQL is used to manage databases.
+JavaScript is mainly used for web development.
+Git is a version control system created by Linus Torvalds.
+Linux is an open-source operating system.
+
+What is coding? Coding is writing instructions for a computer.
+What is a variable? A variable stores data in a program.
+What is a function? A function is a reusable block of code.
+What is a loop? A loop repeats a block of code.
+What is an array? An array stores multiple values in one variable.
+What is polymorphism? Polymorphism allows one method to have different behaviors.
+What is inheritance? Inheritance lets a class use properties of another class.
+What is encapsulation? Encapsulation hides details and exposes only essentials.
+What is abstraction? Abstraction focuses on essential details only.
+What is debugging? Debugging is fixing errors in code.
+
+Shakespeare wrote Romeo and Juliet.
+Rome is the capital of Italy.
+Paris is the capital of France.
+London is the capital of the United Kingdom.
+Berlin is the capital of Germany.
+Tokyo is the capital of Japan.
+Beijing is the capital of China.
+Manila is the capital of the Philippines.
+Moscow is the capital of Russia.
+Brasília is the capital of Brazil.
+
+The Great Wall of China was built to protect against invasions.
+The Declaration of Independence was signed in 1776.
+World War I lasted from 1914 to 1918.
+World War II lasted from 1939 to 1945.
+The Berlin Wall fell in 1989.
+The Roman Empire fell in 476 AD.
+The Cold War was a period of tension between the USA and USSR.
+The Industrial Revolution began in Britain in the 18th century.
+The French Revolution began in 1789.
+George Washington was the first president of the United States.
+
+The rainbow has seven colors.
+The fastest land animal is the cheetah.
+The tallest animal is the giraffe.
+Fish breathe through gills.
+Birds have feathers.
+Dolphins are mammals.
+Kangaroos are native to Australia.
+Octopuses have three hearts.
+Sharks have been on Earth for millions of years.
+Penguins live mostly in the Southern Hemisphere.
+
+Honey never spoils.
+Bananas are berries but strawberries are not.
+The piano has 88 keys.
+Chess originated in India.
+Soccer is the most popular sport in the world.
+Basketball was invented by James Naismith.
+Baseball is popular in the United States and Japan.
+The Olympics began in ancient Greece.
+The FIFA World Cup is held every four years.
+The NBA is a basketball league in the USA.
+
+Pi is approximately 3.14159.
+The Pythagorean theorem is a² + b² = c².
+Prime numbers are divisible only by 1 and themselves.
+The square root of 81 is 9.
+The speed of light is the universal speed limit.
+Black holes have gravity so strong that not even light can escape.
+The Milky Way is the galaxy we live in.
+Andromeda is the closest large galaxy to the Milky Way.
+The Big Bang theory explains the origin of the universe.
+Stars are powered by nuclear fusion.
+
+Who are you? I am an AI, a program designed to answer questions and assist.
+Do you eat food? No, I do not eat. I process data instead.
+Can you sleep? No, I do not sleep, but I can wait until you ask again.
+Can you dream? I do not dream, I calculate and respond.
+Can you lie? No, I do not lie. I only give answers based on my knowledge.
+Can you think? I do not think like humans, I process information.
+Can you feel? I do not feel emotions, but I can respond kindly.
+Can you tell a joke? Sure! Why was the math book sad? Because it had too many problems.
+Can you sing? I cannot sing, but I can give you lyrics.
+Can you dance? No, I cannot dance, but I can move data quickly.
+
