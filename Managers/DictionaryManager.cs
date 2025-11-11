@@ -17,7 +17,7 @@ namespace PlanIT2.Managers
         private TextBox searchBox;
         private bool isDictionaryVisible = false;
         private ComboBox filterComboBox;
-        private string currentUsername; // Store current logged-in username
+        private string currentUsername;
         private Button requestBtn;
         private Button manageRequestsBtn;
 
@@ -28,7 +28,6 @@ namespace PlanIT2.Managers
         }
         private void LoadDictionaryFromDatabase()
         {
-            // Use OrdinalIgnoreCase for case-insensitive lookup
             dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             try
@@ -379,9 +378,6 @@ namespace PlanIT2.Managers
             return currentUsername.Equals("Admin", StringComparison.OrdinalIgnoreCase);
         }
 
-        // ------------------------------------------------------------------
-        // NEW: Admin 'Add Word' Dialog (immediate addition)
-        // ------------------------------------------------------------------
         private void ShowAddWordDialog()
         {
             Form dialog = new Form
@@ -1010,8 +1006,6 @@ namespace PlanIT2.Managers
                     {
                         try
                         {
-                            // Check if word already exists in dictionary before adding to prevent transaction rollback error 
-                            // on duplicate key, especially in a race condition.
                             string checkQuery = "SELECT COUNT(*) FROM dictionary WHERE word = @word COLLATE utf8mb4_unicode_ci";
                             using (MySqlCommand cmd = new MySqlCommand(checkQuery, conn, transaction))
                             {
@@ -1507,7 +1501,7 @@ namespace PlanIT2.Managers
             btnFavorite.Click += (s, e) =>
             {
                 ToggleFavoriteWord(word);
-                dialog.Close(); // Close and let user reopen to see updated status, or implement dynamic update logic here
+                dialog.Close(); 
             };
             dialog.Controls.Add(btnFavorite);
 

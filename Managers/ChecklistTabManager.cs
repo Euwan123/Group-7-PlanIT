@@ -21,37 +21,6 @@ namespace PlanIT2.TabTypes
         {
             MarkUnsaved = markUnsaved;
             isDarkMode = darkMode;
-            InitializeDatabase();
-        }
-
-        private void InitializeDatabase()
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string createTable = @"CREATE TABLE IF NOT EXISTS checklists (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        status BOOLEAN DEFAULT FALSE,
-                        text VARCHAR(500),
-                        priority VARCHAR(20) DEFAULT 'Medium',
-                        category VARCHAR(100),
-                        due_date DATE NULL,
-                        notes TEXT,
-                        item_order INT DEFAULT 0,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )";
-                    using (var cmd = new MySqlCommand(createTable, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Database initialization error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         public TabPage CreateChecklistTab(string name, string content = null)

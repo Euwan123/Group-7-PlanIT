@@ -41,45 +41,6 @@ namespace PlanIT2.Database
                 return false;
             }
         }
-
-        // Initialize database tables (run this once)
-        public bool InitializeDatabase()
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string createTableQuery = @"
-                        CREATE TABLE IF NOT EXISTS tabs (
-                            id INT PRIMARY KEY AUTO_INCREMENT,
-                            title VARCHAR(255) NOT NULL,
-                            type VARCHAR(50) NOT NULL,
-                            content LONGTEXT,
-                            tab_color VARCHAR(7) DEFAULT '#FFFFFF',
-                            ai_history LONGTEXT,
-                            is_deleted BOOLEAN DEFAULT FALSE,
-                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            INDEX idx_type (type),
-                            INDEX idx_title (title),
-                            INDEX idx_deleted (is_deleted)
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-
-                    using (var cmd = new MySqlCommand(createTableQuery, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Database initialization failed: {ex.Message}");
-                return false;
-            }
-        }
-
         // Save a tab to database
         public int SaveTab(TabData tabData)
         {

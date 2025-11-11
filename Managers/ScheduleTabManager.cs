@@ -21,36 +21,6 @@ namespace PlanIT2.TabTypes
         {
             MarkUnsaved = markUnsaved;
             isDarkMode = darkMode;
-            InitializeDatabase();
-        }
-
-        private void InitializeDatabase()
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string createTable = @"CREATE TABLE IF NOT EXISTS schedules (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        status BOOLEAN DEFAULT FALSE,
-                        date VARCHAR(50),
-                        time VARCHAR(50),
-                        priority VARCHAR(20),
-                        category VARCHAR(100),
-                        notes TEXT,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )";
-                    using (var cmd = new MySqlCommand(createTable, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Database initialization error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         public TabPage CreateScheduleTab(string name, string content = null)

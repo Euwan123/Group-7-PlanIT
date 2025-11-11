@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace PlanIT2.TabTypes
 {
@@ -12,6 +13,7 @@ namespace PlanIT2.TabTypes
         private Action markUnsavedCallback;
         private bool isDarkMode;
         private int undoLevels;
+        private string connectionString = "Server=localhost;Database=planit;Uid=root;Pwd=;";
 
         public EnhancedTextTabManager(Action markUnsaved, bool darkMode, int undoLevels)
         {
@@ -20,10 +22,86 @@ namespace PlanIT2.TabTypes
             this.undoLevels = undoLevels;
         }
 
+        public void SaveTabToDatabase(string tabName, string content, int themeIndex)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string checkQuery = "SELECT COUNT(*) FROM text WHERE tab_name = @tabName";
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@tabName", tabName);
+                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (exists > 0)
+                    {
+                        string updateQuery = "UPDATE text SET content = @content, theme_index = @themeIndex WHERE tab_name = @tabName";
+                        MySqlCommand updateCmd = new MySqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@content", content);
+                        updateCmd.Parameters.AddWithValue("@themeIndex", themeIndex);
+                        updateCmd.Parameters.AddWithValue("@tabName", tabName);
+                        updateCmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        string insertQuery = "INSERT INTO text (tab_name, content, theme_index) VALUES (@tabName, @content, @themeIndex)";
+                        MySqlCommand insertCmd = new MySqlCommand(insertQuery, conn);
+                        insertCmd.Parameters.AddWithValue("@tabName", tabName);
+                        insertCmd.Parameters.AddWithValue("@content", content);
+                        insertCmd.Parameters.AddWithValue("@themeIndex", themeIndex);
+                        insertCmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving to database: {ex.Message}", "Save Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public (string content, int themeIndex) LoadTabFromDatabase(string tabName)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT content, theme_index FROM text WHERE tab_name = @tabName";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@tabName", tabName);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string content = reader.IsDBNull(0) ? "" : reader.GetString(0);
+                            int themeIndex = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);
+                            return (content, themeIndex);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading from database: {ex.Message}", "Load Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return ("", 0);
+        }
+
         public TabPage CreateTextTab(string name, string content = "")
         {
             TabPage tab = new TabPage(name);
             tab.BackColor = isDarkMode ? Color.FromArgb(30, 30, 30) : Color.White;
+
+            var loadedData = LoadTabFromDatabase(name);
+            if (!string.IsNullOrEmpty(loadedData.content))
+            {
+                content = loadedData.content;
+            }
+            int savedThemeIndex = loadedData.themeIndex;
 
             Panel containerPanel = new Panel
             {
@@ -31,7 +109,6 @@ namespace PlanIT2.TabTypes
                 BackColor = tab.BackColor
             };
 
-            // Top Toolbar for formatting
             Panel toolbarPanel = new Panel
             {
                 Dock = DockStyle.Top,
@@ -40,7 +117,6 @@ namespace PlanIT2.TabTypes
                 Padding = new Padding(10, 5, 10, 5)
             };
 
-            // First Row
             int xPos = 10;
             int yPos = 8;
 
@@ -136,7 +212,6 @@ namespace PlanIT2.TabTypes
             SetTooltip(highlightBtn, "Highlight");
             toolbarPanel.Controls.Add(highlightBtn);
 
-            // Second Row
             xPos = 10;
             yPos = 50;
 
@@ -162,7 +237,7 @@ namespace PlanIT2.TabTypes
                 "☕ Coffee Brown",
                 "❄️ Ice Blue"
             });
-            themeCombo.SelectedIndex = 0;
+            themeCombo.SelectedIndex = savedThemeIndex;
             toolbarPanel.Controls.Add(themeCombo);
             xPos += 160;
 
@@ -182,7 +257,7 @@ namespace PlanIT2.TabTypes
             xPos += 45;
 
             Button bulletBtn = CreateToolbarButton("•", xPos, yPos, false);
-            SetTooltip(bulletBtn, "Bullet List");
+            SetTooltip(bulletBtn, "Bullet List (Click for options)");
             toolbarPanel.Controls.Add(bulletBtn);
             xPos += 35;
 
@@ -217,7 +292,6 @@ namespace PlanIT2.TabTypes
             toolbarPanel.Controls.Add(clearFormatBtn);
             xPos += 120;
 
-            // NEW: Find & Replace Button
             Button findReplaceBtn = new Button
             {
                 Text = "🔍 Find",
@@ -234,7 +308,6 @@ namespace PlanIT2.TabTypes
             toolbarPanel.Controls.Add(findReplaceBtn);
             xPos += 80;
 
-            // NEW: Word Count Button
             Button wordCountBtn = new Button
             {
                 Text = "📊",
@@ -251,7 +324,6 @@ namespace PlanIT2.TabTypes
             toolbarPanel.Controls.Add(wordCountBtn);
             xPos += 45;
 
-            // NEW: Spell Check Button
             Button spellCheckBtn = new Button
             {
                 Text = "✓",
@@ -267,7 +339,6 @@ namespace PlanIT2.TabTypes
             SetTooltip(spellCheckBtn, "Spell Check");
             toolbarPanel.Controls.Add(spellCheckBtn);
 
-            // RichTextBox
             RichTextBox rtb = new RichTextBox
             {
                 Dock = DockStyle.Fill,
@@ -282,7 +353,6 @@ namespace PlanIT2.TabTypes
                 ScrollBars = RichTextBoxScrollBars.Vertical
             };
 
-            // Load content
             if (!string.IsNullOrEmpty(content))
             {
                 try
@@ -302,16 +372,17 @@ namespace PlanIT2.TabTypes
                 }
             }
 
-            // Store current font settings
-            Font currentDefaultFont = new Font("Segoe UI", 11);
+            ApplyTheme(rtb, containerPanel, toolbarPanel, savedThemeIndex);
 
-            // Text changed event
+            Font nextCharFont = new Font("Segoe UI", 11);
+            bool formatLocked = false;
+
             rtb.TextChanged += (s, e) =>
             {
                 markUnsavedCallback?.Invoke();
+                SaveTabToDatabase(name, GetContent(tab), themeCombo.SelectedIndex);
             };
 
-            // Selection changed - update toolbar
             rtb.SelectionChanged += (s, e) =>
             {
                 if (rtb.SelectionFont != null)
@@ -328,17 +399,21 @@ namespace PlanIT2.TabTypes
                     italicBtn.BackColor = sf.Italic ? Color.FromArgb(220, 70, 0) : Color.FromArgb(100, 100, 100);
                     underlineBtn.BackColor = sf.Underline ? Color.FromArgb(220, 70, 0) : Color.FromArgb(100, 100, 100);
                     strikeBtn.BackColor = sf.Strikeout ? Color.FromArgb(220, 70, 0) : Color.FromArgb(100, 100, 100);
+
+                    if (rtb.SelectionLength == 0)
+                    {
+                        nextCharFont = new Font(sf.FontFamily, sf.Size, sf.Style);
+                    }
                 }
             };
 
-            // Font change
             fontCombo.SelectedIndexChanged += (s, e) =>
             {
                 if (fontCombo.SelectedItem == null) return;
 
                 string fontName = fontCombo.SelectedItem.ToString();
-                float fontSize = rtb.SelectionFont?.Size ?? 11;
-                FontStyle style = rtb.SelectionFont?.Style ?? FontStyle.Regular;
+                float fontSize = rtb.SelectionFont?.Size ?? nextCharFont.Size;
+                FontStyle style = rtb.SelectionFont?.Style ?? nextCharFont.Style;
 
                 if (rtb.SelectionLength > 0)
                 {
@@ -346,21 +421,22 @@ namespace PlanIT2.TabTypes
                 }
                 else
                 {
-                    currentDefaultFont = new Font(fontName, fontSize, style);
-                    rtb.Font = currentDefaultFont;
+                    nextCharFont = new Font(fontName, fontSize, style);
+                    int cursorPos = rtb.SelectionStart;
+                    rtb.SelectionFont = nextCharFont;
+                    rtb.SelectionStart = cursorPos;
                 }
                 rtb.Focus();
             };
 
-            // Size change
             sizeCombo.SelectedIndexChanged += (s, e) =>
             {
                 if (sizeCombo.SelectedItem == null) return;
 
                 if (float.TryParse(sizeCombo.SelectedItem.ToString(), out float size))
                 {
-                    string fontName = rtb.SelectionFont?.FontFamily.Name ?? "Segoe UI";
-                    FontStyle style = rtb.SelectionFont?.Style ?? FontStyle.Regular;
+                    string fontName = rtb.SelectionFont?.FontFamily.Name ?? nextCharFont.FontFamily.Name;
+                    FontStyle style = rtb.SelectionFont?.Style ?? nextCharFont.Style;
 
                     if (rtb.SelectionLength > 0)
                     {
@@ -368,20 +444,20 @@ namespace PlanIT2.TabTypes
                     }
                     else
                     {
-                        currentDefaultFont = new Font(fontName, size, style);
-                        rtb.Font = currentDefaultFont;
+                        nextCharFont = new Font(fontName, size, style);
+                        int cursorPos = rtb.SelectionStart;
+                        rtb.SelectionFont = nextCharFont;
+                        rtb.SelectionStart = cursorPos;
                     }
                     rtb.Focus();
                 }
             };
 
-            // Style buttons
-            boldBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Bold, ref currentDefaultFont); rtb.Focus(); };
-            italicBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Italic, ref currentDefaultFont); rtb.Focus(); };
-            underlineBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Underline, ref currentDefaultFont); rtb.Focus(); };
-            strikeBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Strikeout, ref currentDefaultFont); rtb.Focus(); };
+            boldBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Bold, ref nextCharFont); rtb.Focus(); };
+            italicBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Italic, ref nextCharFont); rtb.Focus(); };
+            underlineBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Underline, ref nextCharFont); rtb.Focus(); };
+            strikeBtn.Click += (s, e) => { ToggleFontStyle(rtb, FontStyle.Strikeout, ref nextCharFont); rtb.Focus(); };
 
-            // Color buttons
             colorBtn.Click += (s, e) =>
             {
                 using (ColorDialog cd = new ColorDialog())
@@ -392,7 +468,11 @@ namespace PlanIT2.TabTypes
                         if (rtb.SelectionLength > 0)
                             rtb.SelectionColor = cd.Color;
                         else
-                            rtb.ForeColor = cd.Color;
+                        {
+                            int cursorPos = rtb.SelectionStart;
+                            rtb.SelectionColor = cd.Color;
+                            rtb.SelectionStart = cursorPos;
+                        }
                         colorBtn.BackColor = cd.Color;
                         rtb.Focus();
                     }
@@ -408,32 +488,34 @@ namespace PlanIT2.TabTypes
                     {
                         if (rtb.SelectionLength > 0)
                             rtb.SelectionBackColor = cd.Color;
+                        else
+                        {
+                            int cursorPos = rtb.SelectionStart;
+                            rtb.SelectionBackColor = cd.Color;
+                            rtb.SelectionStart = cursorPos;
+                        }
                         highlightBtn.ForeColor = cd.Color;
                         rtb.Focus();
                     }
                 }
             };
 
-            // Theme change
             themeCombo.SelectedIndexChanged += (s, e) =>
             {
                 ApplyTheme(rtb, containerPanel, toolbarPanel, themeCombo.SelectedIndex);
+                SaveTabToDatabase(name, GetContent(tab), themeCombo.SelectedIndex);
             };
 
-            // Alignment
             alignLeftBtn.Click += (s, e) => { rtb.SelectionAlignment = HorizontalAlignment.Left; rtb.Focus(); };
             alignCenterBtn.Click += (s, e) => { rtb.SelectionAlignment = HorizontalAlignment.Center; rtb.Focus(); };
             alignRightBtn.Click += (s, e) => { rtb.SelectionAlignment = HorizontalAlignment.Right; rtb.Focus(); };
 
-            // Bullet/Numbered lists
-            bulletBtn.Click += (s, e) => { rtb.SelectionBullet = !rtb.SelectionBullet; rtb.Focus(); };
+            bulletBtn.Click += (s, e) => { ShowBulletOptions(rtb); rtb.Focus(); };
             numberedBtn.Click += (s, e) => { InsertNumberedList(rtb); rtb.Focus(); };
 
-            // Indent
             increaseIndentBtn.Click += (s, e) => { rtb.SelectionIndent += 20; rtb.Focus(); };
             decreaseIndentBtn.Click += (s, e) => { rtb.SelectionIndent = Math.Max(0, rtb.SelectionIndent - 20); rtb.Focus(); };
 
-            // Clear formatting
             clearFormatBtn.Click += (s, e) =>
             {
                 if (rtb.SelectionLength > 0)
@@ -448,26 +530,22 @@ namespace PlanIT2.TabTypes
                 rtb.Focus();
             };
 
-            // NEW: Find & Replace functionality
             findReplaceBtn.Click += (s, e) =>
             {
                 ShowFindReplaceDialog(rtb);
             };
 
-            // NEW: Word Count Statistics
             wordCountBtn.Click += (s, e) =>
             {
                 ShowTextStatistics(rtb);
             };
 
-            // NEW: Spell Check (Basic implementation)
             spellCheckBtn.Click += (s, e) =>
             {
                 MessageBox.Show("Spell check feature coming soon!\n\nFor now, use the built-in spell checker by right-clicking on text.",
                     "Spell Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 
-            // Keyboard shortcuts
             rtb.KeyDown += (s, e) =>
             {
                 if (e.Control)
@@ -475,15 +553,15 @@ namespace PlanIT2.TabTypes
                     switch (e.KeyCode)
                     {
                         case Keys.B:
-                            ToggleFontStyle(rtb, FontStyle.Bold, ref currentDefaultFont);
+                            ToggleFontStyle(rtb, FontStyle.Bold, ref nextCharFont);
                             e.Handled = true;
                             break;
                         case Keys.I:
-                            ToggleFontStyle(rtb, FontStyle.Italic, ref currentDefaultFont);
+                            ToggleFontStyle(rtb, FontStyle.Italic, ref nextCharFont);
                             e.Handled = true;
                             break;
                         case Keys.U:
-                            ToggleFontStyle(rtb, FontStyle.Underline, ref currentDefaultFont);
+                            ToggleFontStyle(rtb, FontStyle.Underline, ref nextCharFont);
                             e.Handled = true;
                             break;
                         case Keys.F:
@@ -499,6 +577,53 @@ namespace PlanIT2.TabTypes
             tab.Controls.Add(containerPanel);
 
             return tab;
+        }
+
+        private void ShowBulletOptions(RichTextBox rtb)
+        {
+            ContextMenuStrip bulletMenu = new ContextMenuStrip();
+
+            ToolStripMenuItem standardBullet = new ToolStripMenuItem("• Standard Bullet");
+            standardBullet.Click += (s, e) => { rtb.SelectionBullet = true; rtb.BulletIndent = 10; };
+
+            ToolStripMenuItem circleBullet = new ToolStripMenuItem("○ Circle Bullet");
+            circleBullet.Click += (s, e) => { InsertCustomBullet(rtb, "○"); };
+
+            ToolStripMenuItem squareBullet = new ToolStripMenuItem("■ Square Bullet");
+            squareBullet.Click += (s, e) => { InsertCustomBullet(rtb, "■"); };
+
+            ToolStripMenuItem arrowBullet = new ToolStripMenuItem("➤ Arrow Bullet");
+            arrowBullet.Click += (s, e) => { InsertCustomBullet(rtb, "➤"); };
+
+            ToolStripMenuItem checkBullet = new ToolStripMenuItem("✓ Check Bullet");
+            checkBullet.Click += (s, e) => { InsertCustomBullet(rtb, "✓"); };
+
+            ToolStripMenuItem starBullet = new ToolStripMenuItem("★ Star Bullet");
+            starBullet.Click += (s, e) => { InsertCustomBullet(rtb, "★"); };
+
+            ToolStripMenuItem dashBullet = new ToolStripMenuItem("− Dash Bullet");
+            dashBullet.Click += (s, e) => { InsertCustomBullet(rtb, "−"); };
+
+            ToolStripMenuItem removeBullet = new ToolStripMenuItem("✖ Remove Bullets");
+            removeBullet.Click += (s, e) => { rtb.SelectionBullet = false; };
+
+            bulletMenu.Items.AddRange(new ToolStripItem[] {
+                standardBullet, circleBullet, squareBullet, arrowBullet,
+                checkBullet, starBullet, dashBullet, new ToolStripSeparator(), removeBullet
+            });
+
+            bulletMenu.Show(Cursor.Position);
+        }
+
+        private void InsertCustomBullet(RichTextBox rtb, string bullet)
+        {
+            int start = rtb.SelectionStart;
+            int lineStart = rtb.GetFirstCharIndexOfCurrentLine();
+            string currentLine = rtb.Lines[rtb.GetLineFromCharIndex(start)];
+
+            rtb.Select(lineStart, 0);
+            rtb.SelectedText = bullet + " ";
+            rtb.SelectionIndent = 10;
         }
 
         private void ShowFindReplaceDialog(RichTextBox rtb)
@@ -635,7 +760,6 @@ namespace PlanIT2.TabTypes
         {
             string text = rtb.Text;
 
-            // Calculate statistics
             int charCount = text.Length;
             int charNoSpaces = text.Count(c => !char.IsWhiteSpace(c));
             int wordCount = string.IsNullOrWhiteSpace(text) ? 0 :
@@ -682,7 +806,7 @@ Reading time: ~{Math.Ceiling(wordCount / 200.0)} minutes
             tip.SetToolTip(control, text);
         }
 
-        private void ToggleFontStyle(RichTextBox rtb, FontStyle style, ref Font defaultFont)
+        private void ToggleFontStyle(RichTextBox rtb, FontStyle style, ref Font nextCharFont)
         {
             if (rtb.SelectionLength > 0)
             {
@@ -703,14 +827,17 @@ Reading time: ~{Math.Ceiling(wordCount / 200.0)} minutes
             }
             else
             {
-                FontStyle newStyle = defaultFont.Style;
+                FontStyle newStyle = nextCharFont.Style;
                 if ((newStyle & style) == style)
                     newStyle &= ~style;
                 else
                     newStyle |= style;
 
-                defaultFont = new Font(defaultFont.FontFamily, defaultFont.Size, newStyle);
-                rtb.Font = defaultFont;
+                nextCharFont = new Font(nextCharFont.FontFamily, nextCharFont.Size, newStyle);
+
+                int cursorPos = rtb.SelectionStart;
+                rtb.SelectionFont = nextCharFont;
+                rtb.SelectionStart = cursorPos;
             }
         }
 
@@ -735,55 +862,55 @@ Reading time: ~{Math.Ceiling(wordCount / 200.0)} minutes
         {
             switch (themeIndex)
             {
-                case 0: // Default
+                case 0:
                     rtb.BackColor = Color.White;
                     rtb.ForeColor = Color.Black;
                     container.BackColor = Color.White;
                     toolbar.BackColor = Color.FromArgb(250, 250, 250);
                     break;
-                case 1: // Dark Mode
+                case 1:
                     rtb.BackColor = Color.FromArgb(30, 30, 30);
                     rtb.ForeColor = Color.White;
                     container.BackColor = Color.FromArgb(30, 30, 30);
                     toolbar.BackColor = Color.FromArgb(40, 40, 40);
                     break;
-                case 2: // Ocean Blue
+                case 2:
                     rtb.BackColor = Color.FromArgb(230, 240, 255);
                     rtb.ForeColor = Color.FromArgb(0, 40, 80);
                     container.BackColor = Color.FromArgb(230, 240, 255);
                     toolbar.BackColor = Color.FromArgb(200, 220, 255);
                     break;
-                case 3: // Soft Pink
+                case 3:
                     rtb.BackColor = Color.FromArgb(255, 240, 245);
                     rtb.ForeColor = Color.FromArgb(60, 20, 40);
                     container.BackColor = Color.FromArgb(255, 240, 245);
                     toolbar.BackColor = Color.FromArgb(255, 220, 235);
                     break;
-                case 4: // Forest Green
+                case 4:
                     rtb.BackColor = Color.FromArgb(240, 255, 240);
                     rtb.ForeColor = Color.FromArgb(20, 60, 20);
                     container.BackColor = Color.FromArgb(240, 255, 240);
                     toolbar.BackColor = Color.FromArgb(220, 255, 220);
                     break;
-                case 5: // Sunset Orange
+                case 5:
                     rtb.BackColor = Color.FromArgb(255, 245, 230);
                     rtb.ForeColor = Color.FromArgb(80, 40, 0);
                     container.BackColor = Color.FromArgb(255, 245, 230);
                     toolbar.BackColor = Color.FromArgb(255, 230, 200);
                     break;
-                case 6: // Royal Purple
+                case 6:
                     rtb.BackColor = Color.FromArgb(245, 240, 255);
                     rtb.ForeColor = Color.FromArgb(40, 0, 80);
                     container.BackColor = Color.FromArgb(245, 240, 255);
                     toolbar.BackColor = Color.FromArgb(230, 220, 255);
                     break;
-                case 7: // Coffee Brown
+                case 7:
                     rtb.BackColor = Color.FromArgb(250, 245, 235);
                     rtb.ForeColor = Color.FromArgb(60, 40, 20);
                     container.BackColor = Color.FromArgb(250, 245, 235);
                     toolbar.BackColor = Color.FromArgb(240, 230, 210);
                     break;
-                case 8: // Ice Blue
+                case 8:
                     rtb.BackColor = Color.FromArgb(240, 250, 255);
                     rtb.ForeColor = Color.FromArgb(0, 50, 100);
                     container.BackColor = Color.FromArgb(240, 250, 255);
@@ -804,7 +931,6 @@ Reading time: ~{Math.Ceiling(wordCount / 200.0)} minutes
                         {
                             try
                             {
-                                // Only return RTF if there's actual content
                                 if (string.IsNullOrWhiteSpace(rtb.Text))
                                     return "";
                                 return rtb.Rtf;
